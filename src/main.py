@@ -37,31 +37,31 @@ def click_event(canvas, event):
 
         check()
 
+def collection_equal(c):
+    return CLEAR not in c and c[1:] == c[:-1]
+
 def check():
     global win
 
     #vertical
     for a in range(3):
-        if CLEAR not in STATE[a] and STATE[a][1:] == STATE[a][:-1]:
+        if collection_equal(STATE[a]):
             win = True
 
     #horizontal
     for a in zip(STATE[0], STATE[1], STATE[2]):
-        if CLEAR not in a and a[1:] == a[:-1]:
+        if collection_equal(a):
             win = True
 
-    """
-    for item in zip(enumerate(STATE)):
-        print(item[0])
-        if CLEAR not in item and item[0][1:] == item[0][:-1]:
-            win = True
-    """
+    #diagonal 1
+    if collection_equal([STATE[a][a] for a in range(3)]):
+        win = True
 
-    #diagonal
+    #diagonal 2
+    if collection_equal([STATE[a][2-a] for a in range(3)]):
+        win = True
 
     #check turn count for draws
-
-    #print(STATE)
 
     if win:
         print('winner')
