@@ -42,21 +42,26 @@ def check():
 
     #vertical
     for a in range(3):
-        if CLEAR not in STATE[a]:
-            if STATE[a][1:] == STATE[a][:-1]:
-                win = True
+        if CLEAR not in STATE[a] and STATE[a][1:] == STATE[a][:-1]:
+            win = True
 
     #horizontal
-    z = zip(STATE[0], STATE[1], STATE[2])
+    for a in zip(STATE[0], STATE[1], STATE[2]):
+        if CLEAR not in a and a[1:] == a[:-1]:
+            win = True
 
-    for a in z:
-        if CLEAR not in a:
-            if a[1:] == a[:-1]:
-                win = True
+    """
+    for item in zip(enumerate(STATE)):
+        print(item[0])
+        if CLEAR not in item and item[0][1:] == item[0][:-1]:
+            win = True
+    """
 
     #diagonal
 
     #check turn count for draws
+
+    #print(STATE)
 
     if win:
         print('winner')
