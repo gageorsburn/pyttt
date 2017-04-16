@@ -11,13 +11,10 @@ def collection_equal(c):
 
 class Board:
 
-    def __init__(self):
-        self.state = [
-            [CLEAR, CLEAR, CLEAR],
-            [CLEAR, CLEAR, CLEAR],
-            [CLEAR, CLEAR, CLEAR]
-        ]
-        
+    def __init__(self, grid_size):
+        self.grid_size = grid_size
+        self.state = [[CLEAR] * grid_size for size in range(grid_size)]
+
     def check(self):
 
         if any(collection_equal(s) for s in self.state):
@@ -26,10 +23,10 @@ class Board:
         if any(collection_equal(s) for s in zip(*self.state)):
             self.alert_win()
 
-        if collection_equal([self.state[a][a] for a in range(3)]):
+        if collection_equal([self.state[a][a] for a in range(self.grid_size)]):
             self.alert_win()
 
-        if collection_equal([self.state[a][2-a] for a in range(3)]):
+        if collection_equal([self.state[a][self.grid_size-1-a] for a in range(self.grid_size)]):
             self.alert_win()
 
     def set_state(self, x, y, v):

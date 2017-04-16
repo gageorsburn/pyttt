@@ -6,6 +6,8 @@ from view import View
 
 turn = 0
 
+GRID_SIZE = 7
+
 def get_turn():
     return turn
 
@@ -14,8 +16,8 @@ def increment_turn():
     turn += 1
 
 if __name__ == "__main__":
-    board = Board()
-    view = View()
+    board = Board(GRID_SIZE)
+    view = View(GRID_SIZE)
 
     view.set_state = board.set_state
     view.is_clear = board.is_clear

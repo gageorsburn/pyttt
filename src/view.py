@@ -7,20 +7,26 @@ from functools import partial
 SQUARE_SIZE = 100
 
 class View:
-    def __init__(self):
+    def __init__(self, grid_size):
         self.window = Tk()
         self.turn = 0
+        self.grid_size = grid_size
         self.win = False
 
-        canvas = Canvas(self.window, width=300, height=300)
+        canvas = Canvas(self.window, width=SQUARE_SIZE*grid_size, height=SQUARE_SIZE*grid_size)
         canvas.pack()
 
-        #vertical lines
-        canvas.create_line(100, 0, 100, 300)
-        canvas.create_line(200, 0, 200, 300)
-        #horizontal lines
-        canvas.create_line(300, 100, 0, 100)
-        canvas.create_line(300, 200, 0, 200)
+        #vertical
+        for line in range(grid_size - 1):
+            x, y = (SQUARE_SIZE * (line + 1),
+                    grid_size * SQUARE_SIZE)
+            canvas.create_line(x, 0, x, y)
+
+        #horizontal
+        for line in range(grid_size - 1):
+            x, y = (SQUARE_SIZE * grid_size,
+                    SQUARE_SIZE * (line + 1))
+            canvas.create_line(x, y, 0, y)
 
         canvas.bind('<Button-1>', partial(self.click_event, canvas))
 
