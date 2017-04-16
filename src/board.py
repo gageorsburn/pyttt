@@ -17,33 +17,23 @@ class Board:
             [CLEAR, CLEAR, CLEAR],
             [CLEAR, CLEAR, CLEAR]
         ]
-
-    #def __init(self, state):
-    #    self.state = state
-
+        
     def check(self):
-        win = False
 
-        for a in range(3):
-            if collection_equal(self.state[a]):
-                win = True
+        if any(collection_equal(s) for s in self.state):
+            self.alert_win()
 
-        for a in zip(self.state[0], self.state[1], self.state[2]):
-            if collection_equal(a):
-                win = True
+        if any(collection_equal(s) for s in zip(*self.state)):
+            self.alert_win()
 
         if collection_equal([self.state[a][a] for a in range(3)]):
-            win = True
+            self.alert_win()
 
         if collection_equal([self.state[a][2-a] for a in range(3)]):
-            win = True
-
-        if win:
             self.alert_win()
 
     def set_state(self, x, y, v):
         self.state[x][y] = v
-        #self = Board(self.state)
         self.check()
 
     def is_clear(self, x, y):
