@@ -4,6 +4,9 @@
 from board import Board
 from view import View
 
+import socket
+
+"""
 turn = 0
 
 GRID_SIZE = 7
@@ -32,3 +35,14 @@ if __name__ == "__main__":
     board.alert_win = dispatch_win
 
     view.loop()
+"""
+
+class Game:
+
+    def __init__(self):
+        self.view = View()
+
+if __name__ == '__main__':
+    game = Game()
+
+    game.view.loop()
